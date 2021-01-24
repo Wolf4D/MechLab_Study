@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a567234b3b607004fb0174e82f0ab3e0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - origPhoton: {fileID: 7588584058269945935, guid: ad3ef099191132447bb4e500d51e1335,
+      type: 3}
+  - sphereForPosition: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
