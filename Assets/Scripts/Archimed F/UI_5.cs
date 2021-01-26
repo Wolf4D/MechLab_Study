@@ -21,38 +21,38 @@ public class UI_5 : MonoBehaviour
 	{
 		if (MoveTo.whichObj == '1')
 		{
-			Density.text = $"Плотность: {Ice_Script.objectDensity}";
-			MG.text = $"mg: {Ice_Script.mg}";
+			Density.text = $"Плотность: {Ice_Script.objectDensity} кг/м³";
+			MG.text = $"mg: {Ice_Script.mg} Н";
 			PUW.text = $"Погруженная часть: {Ice_Script.PartUnderWater}";
-			FA.text = $"Сила архимеда: {Ice_Script.forceArchimed}";
+			FA.text = $"Сила архимеда: {Ice_Script.forceArchimed} Н";
 		}
 		else if (MoveTo.whichObj == '2')
 		{
-			Density.text = $"Плотность: {Log_Script.objectDensity}";
-			MG.text = $"mg: {Log_Script.mg}";
+			Density.text = $"Плотность: {Log_Script.objectDensity} кг/м³";
+			MG.text = $"mg: {Log_Script.mg} Н";
 			PUW.text = $"Погруженная часть: {Log_Script.PartUnderWater}";
-			FA.text = $"Сила архимеда: {Log_Script.forceArchimed}";
+			FA.text = $"Сила архимеда: {Log_Script.forceArchimed} Н";
 		}
 		else if (MoveTo.whichObj == '3')
 		{
-			Density.text = $"Плотность: {Bottle_Script.objectDensity}";
-			MG.text = $"mg: {Bottle_Script.mg}";
+			Density.text = $"Плотность: {Bottle_Script.objectDensity} кг/м³";
+			MG.text = $"mg: {0.04f * 9.81f} Н";
 			PUW.text = $"Погруженная часть: {Bottle_Script.PartUnderWater}";
-			FA.text = $"Сила архимеда: {Bottle_Script.forceArchimed}";
+			FA.text = $"Сила архимеда: {Bottle_Script.forceArchimed / 500} Н";
 		}
 		else if (MoveTo.whichObj == '4')
 		{
-			Density.text = $"Плотность: {Gold_Script.objectDensity}";
-			MG.text = $"mg: {Gold_Script.mg}";
+			Density.text = $"Плотность: {Gold_Script.objectDensity} кг/м³";
+			MG.text = $"mg: {Gold_Script.mg} Н";
 			PUW.text = $"Погруженная часть: {Gold_Script.PartUnderWater}";
-			FA.text = $"Сила архимеда: {Gold_Script.forceArchimed}";
+			FA.text = $"Сила архимеда: {Gold_Script.forceArchimed} Н";
 		}
 		else if (MoveTo.whichObj == '5')
 		{
-			Density.text = $"Плотность: {Glass_Script.objectDensity}";
-			MG.text = $"mg: {Glass_Script.mg}";
+			Density.text = $"Плотность: {Glass_Script.objectDensity} кг/м³";
+			MG.text = $"mg: {Glass_Script.mg} Н";
 			PUW.text = $"Погруженная часть: {Glass_Script.PartUnderWater}";
-			FA.text = $"Сила архимеда: {Glass_Script.forceArchimed}";
+			FA.text = $"Сила архимеда: {Glass_Script.forceArchimed} Н";
 		}
 	}
 

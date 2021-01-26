@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class ObjectScript : MonoBehaviour
 	private BoxCollider Ground_Box_Collider;
 	private GameObject Object_For_Distance;
 	private Rigidbody _rigidbody;
-	private bool paused = false;
+	private bool paused = true;
 
 	public float h; // Высота;								Не изменяется человеком
 	public float v; // Скорость;							Не изменяется человеком
@@ -46,7 +47,10 @@ public class ObjectScript : MonoBehaviour
 		h = transform.position.y;
 		if (h < 0.151f)
 			h = 0;
-		v = _rigidbody.velocity.magnitude;
+		if ((int)Ep == 764)
+			v = 0;
+		else
+			v = _rigidbody.velocity.magnitude;
 		_rigidbody.mass = mass;
 		Ground_Box_Collider.material.dynamicFriction = M;
 		Ground_Box_Collider.material.staticFriction = M;
@@ -63,6 +67,9 @@ public class ObjectScript : MonoBehaviour
 
 	private void Start()
 	{
+		Time.timeScale = 0;
+		v = 0;
+
 		Ground = GameObject.Find("Ground");
 		Object_For_Distance = GameObject.Find("Object_For_Distance");
 

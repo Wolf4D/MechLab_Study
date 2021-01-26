@@ -13,9 +13,21 @@ public class UI_3 : MonoBehaviour
 	private Text Input_m_parallel;
 	private Text Input_k_posl;
 	private Text Input_m_posl;
+	private Text x1;
+	private Text x2;
 
 	private void Update()
 	{
+		if (Spring1_Script.x < 0)
+			Spring1_Script.x = 0;
+		else
+			x1.text = $"Δx: {Math.Round(Spring1_Script.x, 2)} м";
+
+		if (BigSpring_Script.x < 0)
+			BigSpring_Script.x = 0;
+		else
+			x2.text = $"Δx: {Math.Round(BigSpring_Script.x, 2)} м";
+
 		try
 		{
 			Spring1_Script.k = (float)Convert.ToDouble(Input_k_parallel.text);
@@ -50,5 +62,7 @@ public class UI_3 : MonoBehaviour
 		Input_m_parallel = GameObject.Find("Input_m_parallel").GetComponent<Text>();
 		Input_k_posl = GameObject.Find("Input_k_posl").GetComponent<Text>();
 		Input_m_posl = GameObject.Find("Input_m_posl").GetComponent<Text>();
+		x1 = GameObject.Find("x1").GetComponent<Text>();
+		x2 = GameObject.Find("x2").GetComponent<Text>();
 	}
 }

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class OtherPhoton : MonoBehaviour
 {
+	private Transform Empty_Position;
+	private Transform Wall4_PosZ;
+
 	private IEnumerator Destroying()
 	{
-		yield return new WaitForSeconds((24 - (GameObject.Find("Empty_Position").transform.position.z - GameObject.Find("Wall4_PosZ").transform.position.z)) / 5);
+		yield return new WaitForSeconds((24 - (Empty_Position.position.z - Wall4_PosZ.position.z)) / 5);
 
 		Destroy(gameObject);
 	}
@@ -18,6 +21,9 @@ public class OtherPhoton : MonoBehaviour
 
 	private void Start()
 	{
+		Empty_Position = GameObject.Find("Empty_Position").transform;
+		Wall4_PosZ = GameObject.Find("Wall4_PosZ").transform;
+
 		StartCoroutine(Destroying());
 	}
 }

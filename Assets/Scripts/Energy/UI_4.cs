@@ -22,13 +22,13 @@ public class UI_4 : MonoBehaviour
 
 	private void Update()
 	{
-		H.text = $"Высота: {ObjectScript_.h} м";
-		V.text = $"Скорость: {ObjectScript_.v} м/с";
-		Ek.text = $"Ек: {ObjectScript_.Ek} Дж";
-		Ep.text = $"Еп: {ObjectScript_.Ep} Дж";
-		Ftr.text = $"Сила трения: {ObjectScript_.Ftr} Н";
-		T.text = $"Температура: {ObjectScript_.t} °C";
-		Q.text = $"Выделенное тепло: {ObjectScript_.Q} Дж";
+		H.text = $"Высота: {Math.Round(ObjectScript_.h, 1)} м";
+		V.text = $"Скорость: {Math.Round(ObjectScript_.v, 1)} м/с";
+		Ek.text = $"Ек: {(int)ObjectScript_.Ek} Дж";
+		Ep.text = $"Еп: {(int)ObjectScript_.Ep} Дж";
+		Ftr.text = $"Сила трения: {Math.Round(ObjectScript_.Ftr, 1)} Н";
+		T.text = $"Температура: {Math.Round(ObjectScript_.t, 4)} °C";
+		Q.text = $"Выделенное тепло: {(int)ObjectScript_.Q} Дж";
 		
 		try
 		{
