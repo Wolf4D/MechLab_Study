@@ -11,14 +11,30 @@ public class UI_5 : MonoBehaviour
 	private AF_Bottle Bottle_Script;
 	private AF_Gold Gold_Script;
 	private AF_Glass Glass_Script;
+	private GameObject Manual;
 
 	private Text Density;
 	private Text MG;
 	private Text PUW;
 	private Text FA;
 
+	private bool isHidden;
+
+	public void Instruction()
+	{
+		if (isHidden == true)
+			isHidden = false;
+		else
+			isHidden = true;
+	}
+
 	private void Update()
 	{
+		if (isHidden == true)
+			Manual.SetActive(false);
+		else
+			Manual.SetActive(true);
+
 		if (MoveTo.whichObj == '1')
 		{
 			Density.text = $"Плотность: {Ice_Script.objectDensity} кг/м³";
@@ -58,6 +74,9 @@ public class UI_5 : MonoBehaviour
 
 	private void Start()
 	{
+		Manual = GameObject.Find("Manual");
+		isHidden = true;
+
 		Ice_Script = GameObject.Find("Ice").GetComponent<AF_Ice>();
 		Log_Script = GameObject.Find("Log").GetComponent<AF_Log>();
 		Bottle_Script = GameObject.Find("Bottle").GetComponent<AF_Bottle>();

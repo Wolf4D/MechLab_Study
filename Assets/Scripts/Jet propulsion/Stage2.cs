@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Stage2 : MonoBehaviour
 {
-	private GameObject Stupen2;
-	private Rigidbody _rigidbody2stupen;
+	private GameObject Stage_2;
+	private Rigidbody _rigidbodyStage2;
 
 	private IEnumerator Jetting ()
 	{
 		yield return new WaitForSeconds(72);
 
-		_rigidbody2stupen.isKinematic = false;
-		Stupen2.transform.parent = null;
+		_rigidbodyStage2.isKinematic = false;
+		Stage_2.transform.parent = null;
 	}
 
 	private void Start()
     {
-		Stupen2 = GameObject.Find("2stupen");
-		_rigidbody2stupen = Stupen2.GetComponent<Rigidbody>();
+		Stage_2 = GameObject.Find("Stage2");
+		_rigidbodyStage2 = Stage_2.GetComponent<Rigidbody>();
 
 		StartCoroutine(Jetting());
     }

@@ -6,44 +6,32 @@ using UnityEngine.UI;
 
 public class UI_1 : MonoBehaviour
 {
-	private MoveScript stupen3;
-
-	private float rocketMass;
-	private int rocketSpeed;
-	private float fuelMass;
-	private float fuelImpulse;
+	private Rigidbody _rigidbody;
 
 	private Text[] Texts = new Text[4];
+	public static int a;
 
 	private void Update()
 	{
-		rocketMass = stupen3.rocketMass;
-		rocketSpeed = (int)stupen3.rocketSpeed;
-		fuelMass = stupen3.fuelMass;
-		fuelImpulse = stupen3.fuelImpulse;
-
-		if(gameObject.name == Texts[0].name)
-			Texts[0].text = $"Масса ракеты: {rocketMass} тонн";
+		if (gameObject.name == Texts[0].name)
+			Texts[0].text = $"Масса ракеты: {MoveScript.m1 / 1000} т";
 		else if (gameObject.name == Texts[1].name)
-			Texts[1].text = $"Скорость ракеты: {rocketSpeed} м/с";
+			Texts[1].text = $"Скорость ракеты: {(int)_rigidbody.velocity.y} м/с";
 		else if (gameObject.name == Texts[2].name)
-			Texts[2].text = $"Масса топлива: {fuelMass} тонн";
+			Texts[2].text = $"Скорость вырывающихся газов: {a} м/с";
 		else if (gameObject.name == Texts[3].name)
-			Texts[3].text = $"Импульс топлива: {fuelImpulse} кг * м/с";
+			Texts[3].text = $"Расход топлива за секунду: {a / 1000} т";
 	}
 
 	private void Start()
 	{
-		stupen3 = GameObject.Find("3stupen").GetComponent<MoveScript>();
+		_rigidbody = GameObject.Find("Stage3").GetComponent<Rigidbody>();
 
-		rocketMass = stupen3.rocketMass;
-		rocketSpeed = (int)stupen3.rocketSpeed;
-		fuelMass = stupen3.fuelMass;
-		fuelImpulse = stupen3.fuelImpulse;
+		Texts[0] = GameObject.Find("m1").GetComponent<Text>();
+		Texts[1] = GameObject.Find("v").GetComponent<Text>();
+		Texts[2] = GameObject.Find("u").GetComponent<Text>();
+		Texts[3] = GameObject.Find("df").GetComponent<Text>();
 
-		Texts[0] = GameObject.Find("RocketMass_").GetComponent<Text>();
-		Texts[1] = GameObject.Find("RocketSpeed_").GetComponent<Text>();
-		Texts[2] = GameObject.Find("FuelMass_").GetComponent<Text>();
-		Texts[3] = GameObject.Find("FuelImpulse_").GetComponent<Text>();
+		a = 2500;
 	}
 }

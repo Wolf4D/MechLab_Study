@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class UI_4 : MonoBehaviour
 {
 	private ObjectScript ObjectScript_;
+	private GameObject Manual;
+	private Transform _Object;
+	private Transform Arrow;
+	private Transform ArrowCanvas;
 
 	private Text Mass;
 	private Text M;
@@ -14,21 +18,42 @@ public class UI_4 : MonoBehaviour
 
 	private Text H;
 	private Text V;
+	public static Transform V1;
+	private Text Vector123;
 	private Text Ek;
 	private Text Ep;
 	private Text Ftr;
 	private Text T;
 	private Text Q;
 
+	private bool isHidden;
+
+	public void Instruction()
+	{
+		if (isHidden == true)
+			isHidden = false;
+		else
+			isHidden = true;
+	}
+
 	private void Update()
 	{
-		H.text = $"Высота: {Math.Round(ObjectScript_.h, 1)} м";
-		V.text = $"Скорость: {Math.Round(ObjectScript_.v, 1)} м/с";
+		Arrow.localScale =	new Vector3(1 + ObjectScript_.v / 10, 0.25f + ObjectScript_.v / 35, 0);
+		Arrow.eulerAngles = new Vector3(0, 0, _Object.eulerAngles.z - 90);
+		ArrowCanvas.position = new Vector3(_Object.position.x, _Object.position.y, 500);
+
+		if (isHidden == true)
+			Manual.SetActive(false);
+		else
+			Manual.SetActive(true);
+
+		H.text = $"h: {Math.Round(ObjectScript_.h, 1)} м";
+		V.text = $"V: {Math.Round(ObjectScript_.v, 1)} м/с";
 		Ek.text = $"Ек: {(int)ObjectScript_.Ek} Дж";
 		Ep.text = $"Еп: {(int)ObjectScript_.Ep} Дж";
-		Ftr.text = $"Сила трения: {Math.Round(ObjectScript_.Ftr, 1)} Н";
-		T.text = $"Температура: {Math.Round(ObjectScript_.t, 4)} °C";
-		Q.text = $"Выделенное тепло: {(int)ObjectScript_.Q} Дж";
+		Ftr.text = $"Fтр: {Math.Round(ObjectScript_.Ftr, 1)} Н";
+		T.text = $"t: {Math.Round(ObjectScript_.t, 4)} °C";
+		Q.text = $"Q: {(int)ObjectScript_.Q} Дж";
 		
 		try
 		{
@@ -51,6 +76,15 @@ public class UI_4 : MonoBehaviour
 
 	private void Start()
 	{
+		_Object = GameObject.Find("Object").transform;
+		Arrow = GameObject.Find("Arrow").transform;
+		ArrowCanvas = GameObject.Find("ArrowCanvas").transform;
+		V1 = GameObject.Find("V1").transform;
+		Vector123 = GameObject.Find("Vector123").GetComponent<Text>();
+
+		Manual = GameObject.Find("Manual");
+		isHidden = true;
+
 		ObjectScript_ = GameObject.Find("Object").GetComponent<ObjectScript>();
 
 		Mass = GameObject.Find("Mass").GetComponent<Text>();

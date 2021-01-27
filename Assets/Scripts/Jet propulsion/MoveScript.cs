@@ -5,74 +5,42 @@ using UnityEngine;
 
 public class MoveScript : MonoBehaviour
 {
-	private Rigidbody _rigidbody;
+	public static Rigidbody _rigidbody;
 
-	public int rocketMass;
-	public float rocketSpeed;
-	public int fuelMass;
-	private int fuelMassSpeedOut;
-	private int fuelSpeed;
-	public int fuelImpulse;
+	public static int m1; // Масса ракеты с топливом
+	public int m2; // Масса топлива
+	public static int u; // Скорость вырывающихся газов
+	public int df; // Расходы массы топлива в единицу времени
+	public int F; // Сила, прикладываемая к ракете
 
-	private const float g = 9.81f;
-
-	private IEnumerator FuelAcceleration()
+	private void FixedUpdate() // 50 раз за секунду
 	{
-		yield return new WaitForSeconds(3);
-
-		while (fuelMass != 0)
+		if (m2 > 0)
 		{
-			fuelSpeed += 1;
-			yield return new WaitForSeconds(1 / 90);
+			m2 -= df / 50; // 50 * 50 = 2500
+			m1 = 5000 + m2; // 5000 - конечная масса ракеты без топлива
+
+			_rigidbody.mass = m1;
 		}
-	}
-
-	private IEnumerator FuelFunc()
-	{
-		while (fuelMass != 0)
+		else
 		{
-			fuelMass -= 50;
-			rocketMass = fuelMass + 30000;
-
-			yield return new WaitForSeconds(0.02f);
-		}
-	}
-
-	private IEnumerator Translating()
-	{
-		yield return new WaitForSeconds(3);
-
-		while (fuelMass != 0)
-		{
-			rocketSpeed = fuelImpulse / rocketMass;
-
-			transform.Translate(0, rocketSpeed / 50, 0);
-
-			yield return new WaitForSeconds(0.02f);
+			m1 = 5000;
+			F = 0;
+			UI_1.a = 0;
+			_rigidbody.isKinematic = true;
 		}
 
-		rocketSpeed = 0;
-		fuelImpulse = 0;
-	}
-
-	private void Update()
-	{
-		fuelImpulse = fuelSpeed * fuelMassSpeedOut;
+		_rigidbody.AddForce(0, F, 0);
 	}
 
 	private void Start()
 	{
-		rocketMass = 300000;
-		rocketSpeed = 0;
-		fuelMass = 270000;
-		rocketSpeed = 0;
-		fuelMassSpeedOut = 2500;
-		fuelImpulse = 0;
-
 		_rigidbody = GetComponent<Rigidbody>();
 
-		StartCoroutine(FuelAcceleration());
-		StartCoroutine(Translating());
-		StartCoroutine(FuelFunc());
+		m1 = 300000;
+		m2 = 270000;
+		u = 2500;
+		df = 2500;
+		F = 6250000;
 	}
 }

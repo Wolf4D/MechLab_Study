@@ -9,6 +9,7 @@ public class ObjectScript : MonoBehaviour
 	private BoxCollider Ground_Box_Collider;
 	private GameObject Object_For_Distance;
 	private Rigidbody _rigidbody;
+	private Transform Arrow;
 	private bool paused = true;
 
 	public float h; // Высота;								Не изменяется человеком
@@ -44,20 +45,27 @@ public class ObjectScript : MonoBehaviour
 				paused = false;
 			}
 
-		h = transform.position.y;
-		if (h < 0.151f)
-			h = 0;
-		if ((int)Ep == 764)
-			v = 0;
+		h = transform.position.y - 0.15f;
+		if (h < 0.5f)
+		{
+			Arrow.gameObject.SetActive(false);
+			UI_4.V1.gameObject.SetActive(false);
+		}
+
+		if (_rigidbody.velocity.x > 0)
+			v = (float)Math.Sqrt((_rigidbody.velocity.x * _rigidbody.velocity.x) + (_rigidbody.velocity.y * _rigidbody.velocity.y));
 		else
-			v = _rigidbody.velocity.magnitude;
+		{
+			v = 0;
+		}
+
 		_rigidbody.mass = mass;
 		Ground_Box_Collider.material.dynamicFriction = M;
 		Ground_Box_Collider.material.staticFriction = M;
 		S = Vector3.Distance(Object_For_Distance.transform.position, transform.position);
-		N = mass * g * (float)System.Math.Cos(90 - Ground.transform.eulerAngles.z);
+		N = mass * g * (float)Math.Cos(90 - Ground.transform.eulerAngles.z);
 
-		Ftr = M * -N;
+		Ftr = M * N;
 		A = Ftr * S;
 		Q = A;
 		t = Q / c / mass + t0;
@@ -69,6 +77,9 @@ public class ObjectScript : MonoBehaviour
 	{
 		Time.timeScale = 0;
 		v = 0;
+		Ftr = 0;
+
+		Arrow = GameObject.Find("Arrow").transform;
 
 		Ground = GameObject.Find("Ground");
 		Object_For_Distance = GameObject.Find("Object_For_Distance");

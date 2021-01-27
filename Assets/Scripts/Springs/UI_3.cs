@@ -8,6 +8,7 @@ public class UI_3 : MonoBehaviour
 {
 	private Spring1 Spring1_Script;
 	private BigSpring BigSpring_Script;
+	private GameObject Manual;
 
 	private Text Input_k_parallel;
 	private Text Input_m_parallel;
@@ -16,8 +17,23 @@ public class UI_3 : MonoBehaviour
 	private Text x1;
 	private Text x2;
 
+	private bool isHidden;
+
+	public void Instruction()
+	{
+		if (isHidden == true)
+			isHidden = false;
+		else
+			isHidden = true;
+	}
+
 	private void Update()
 	{
+		if (isHidden == true)
+			Manual.SetActive(false);
+		else
+			Manual.SetActive(true);
+
 		if (Spring1_Script.x < 0)
 			Spring1_Script.x = 0;
 		else
@@ -55,6 +71,9 @@ public class UI_3 : MonoBehaviour
 
 	private void Start()
 	{
+		Manual = GameObject.Find("Manual");
+		isHidden = true;
+
 		Spring1_Script = GameObject.Find("Spring1").GetComponent<Spring1>();
 		BigSpring_Script = GameObject.Find("BigSpring").GetComponent<BigSpring>();
 
