@@ -790,10 +790,15 @@ PrefabInstance:
       propertyPath: m_Text
       value: "S - \u041F\u0430\u0443\u0437\u0430"
       objectReference: {fileID: 0}
+    - target: {fileID: 4054124883585615492, guid: e14e90c12cc17f74a89849788a8c781f,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 148.04126
+      value: 109.75598
       objectReference: {fileID: 0}
     - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
         type: 3}
@@ -803,12 +808,12 @@ PrefabInstance:
     - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -21.983
+      value: -2.8404
       objectReference: {fileID: 0}
     - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -51.9
+      value: -50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e14e90c12cc17f74a89849788a8c781f, type: 3}

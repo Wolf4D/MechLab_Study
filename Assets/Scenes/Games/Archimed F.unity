@@ -1710,8 +1710,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4054124883585615492, guid: e14e90c12cc17f74a89849788a8c781f,
         type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054124883585615492, guid: e14e90c12cc17f74a89849788a8c781f,
+        type: 3}
       propertyPath: m_FontData.m_VerticalOverflow
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 323.77966
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -109.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e14e90c12cc17f74a89849788a8c781f, type: 3}

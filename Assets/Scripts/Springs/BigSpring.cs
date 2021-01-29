@@ -24,7 +24,7 @@ public class BigSpring : MonoBehaviour
 		transform.localScale = new Vector3(15, height * 8.5f, 15);
 		transform.position = new Vector3(500, (upCube2.transform.position.y - 1) - (height - 1) / 2, 526);
 
-		x = upCube2.transform.position.y - cube2.transform.position.y - 2;
+		x = upCube2.transform.position.y - cube2.transform.position.y - 3;
 		_configurableJointCube2.yDrive = new JointDrive() { positionSpring = k, positionDamper = 0, maximumForce = 3.402823e+38f };
 		_rigidbodyCube2.mass = m;
 		F = Math.Abs(1 / (1 / k + 1 / k) * x);

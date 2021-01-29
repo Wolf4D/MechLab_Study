@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 8d10753558168bf4d84ac1b8606d7e5b,
+  m_LightingDataAsset: {fileID: 112000000, guid: 837bbc5092a6b1442bff2fb6253e346a,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -392,6 +392,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054124883585615492, guid: e14e90c12cc17f74a89849788a8c781f,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 318.57776
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -107.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054124883585615493, guid: e14e90c12cc17f74a89849788a8c781f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -63
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e14e90c12cc17f74a89849788a8c781f, type: 3}
