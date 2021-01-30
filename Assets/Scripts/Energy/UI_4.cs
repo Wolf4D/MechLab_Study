@@ -11,6 +11,7 @@ public class UI_4 : MonoBehaviour
 	private Transform _Object;
 	private Transform Arrow;
 	private Transform ArrowCanvas;
+	private GameObject Ek;
 
 	private Text Mass;
 	private Text M;
@@ -20,13 +21,14 @@ public class UI_4 : MonoBehaviour
 	private Text V;
 	public static Transform V1;
 	private Text Vector123;
-	private Text Ek;
+	private Text Ek_Text;
 	private Text Ep;
 	private Text Ftr;
 	private Text T;
 	private Text Q;
 
 	private bool isHidden;
+	private bool isHidden1;
 
 	public void Instruction()
 	{
@@ -34,6 +36,14 @@ public class UI_4 : MonoBehaviour
 			isHidden = false;
 		else
 			isHidden = true;
+	}
+
+	public void Instruction1()
+	{
+		if (isHidden1 == true)
+			isHidden1 = false;
+		else
+			isHidden1 = true;
 	}
 
 	private void Update()
@@ -47,9 +57,14 @@ public class UI_4 : MonoBehaviour
 		else
 			Manual.SetActive(true);
 
+		if (isHidden1 == true)
+			Ek.SetActive(false);
+		else
+			Ek.SetActive(true);
+
 		H.text = $"h: {Math.Round(ObjectScript_.h, 1)} м";
 		V.text = $"V: {Math.Round(ObjectScript_.v, 1)} м/с";
-		Ek.text = $"Ек: {(int)ObjectScript_.Ek} Дж";
+		Ek_Text.text = $"Ек: {(int)ObjectScript_.Ek} Дж";
 		Ep.text = $"Еп: {(int)ObjectScript_.Ep} Дж";
 		Ftr.text = $"Fтр: {Math.Round(ObjectScript_.Ftr, 1)} Н";
 		T.text = $"t: {Math.Round(ObjectScript_.t, 4)} °C";
@@ -83,7 +98,9 @@ public class UI_4 : MonoBehaviour
 		Vector123 = GameObject.Find("Vector123").GetComponent<Text>();
 
 		Manual = GameObject.Find("Manual");
+		Ek = GameObject.Find("Ek");
 		isHidden = true;
+		isHidden1 = true;
 
 		ObjectScript_ = GameObject.Find("Object").GetComponent<ObjectScript>();
 
@@ -93,7 +110,7 @@ public class UI_4 : MonoBehaviour
 
 		H = GameObject.Find("H").GetComponent<Text>();
 		V = GameObject.Find("V").GetComponent<Text>();
-		Ek = GameObject.Find("Ek").GetComponent<Text>();
+		Ek_Text = GameObject.Find("Ek").GetComponent<Text>();
 		Ep = GameObject.Find("Ep").GetComponent<Text>();
 		Ftr = GameObject.Find("Ftr").GetComponent<Text>();
 		T = GameObject.Find("T").GetComponent<Text>();

@@ -15,8 +15,7 @@ public class AF_Log : MonoBehaviour
 	private float objectScaleY;
 
 	public float objectDensity;
-	private float objectVolume;
-	public float mg;
+	public float objectVolume;
 
 	public const float waterDensity = 1000f;
 	private const float g = 9.81f;
@@ -57,7 +56,6 @@ public class AF_Log : MonoBehaviour
 		objectScaleY = 1.1f;
 
 		_rigidbody.mass = objectDensity * objectVolume;
-		mg = _rigidbody.mass * g;
 
 		damper = _rigidbody.mass * 2f;
 	}

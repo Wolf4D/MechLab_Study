@@ -15,8 +15,7 @@ public class AF_Bottle : MonoBehaviour
 	private float objectScaleY;
 
 	public float objectDensity;
-	private float objectVolume;
-	public float mg;
+	public float objectVolume;
 
 	public const float waterDensity = 1000f;
 	private const float g = 9.81f;
@@ -24,6 +23,13 @@ public class AF_Bottle : MonoBehaviour
 
 	private float damper;
 	public float dampingForce;
+
+	private IEnumerator AL ()
+	{
+		yield return new WaitForSeconds(0.1f);
+
+		_rigidbody.mass = 0.0008f;
+	}
 
 	private void OnTriggerStay(Collider col)
 	{
@@ -52,13 +58,14 @@ public class AF_Bottle : MonoBehaviour
 		Water = GameObject.Find("Water");
 		_rigidbody = GetComponent<Rigidbody>();
 
-		objectDensity = 0.04f;
-		objectVolume = 2f * 0.5f * 0.5f;
+		objectDensity = 1270f;
+		objectVolume = 0.04f / 1270;
 		objectScaleY = 0.5f;
 
-		_rigidbody.mass = 20f;
-		mg = _rigidbody.mass * g;
+		_rigidbody.mass = objectDensity * objectVolume;
 
-		damper = 200f;
+		damper = _rigidbody.mass;
+
+		StartCoroutine(AL());
 	}
 }

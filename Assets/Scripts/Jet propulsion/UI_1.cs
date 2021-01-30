@@ -20,7 +20,7 @@ public class UI_1 : MonoBehaviour
 		else if (gameObject.name == Texts[2].name)
 			Texts[2].text = $"Скорость вырывающихся газов: {a} м/с";
 		else if (gameObject.name == Texts[3].name)
-			Texts[3].text = $"Расход топлива за секунду: {a / 1000} т";
+			Texts[3].text = $"Расход топлива за секунду: {Math.Round(a / 1000f, 1)} т";
 	}
 
 	private void Start()

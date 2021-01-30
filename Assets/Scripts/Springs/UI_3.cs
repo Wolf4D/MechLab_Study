@@ -9,7 +9,7 @@ public class UI_3 : MonoBehaviour
 	private Spring1 Spring1_Script;
 	private BigSpring BigSpring_Script;
 	private GameObject Manual;
-	private GameObject Res;
+	private GameObject k;
 
 	private Text Input_m_parallel;
 	private Text Input_m_posl;
@@ -41,9 +41,9 @@ public class UI_3 : MonoBehaviour
 			Manual.SetActive(true);
 
 		if (isHidden1 == true)
-			Res.SetActive(false);
+			k.SetActive(false);
 		else
-			Res.SetActive(true);
+			k.SetActive(true);
 
 		try
 		{
@@ -61,7 +61,7 @@ public class UI_3 : MonoBehaviour
 	private void Start()
 	{
 		Manual = GameObject.Find("Manual");
-		Res = GameObject.Find("Res");
+		k = GameObject.Find("k");
 		isHidden = true;
 		isHidden1 = true;
 
