@@ -10,7 +10,7 @@ public class AF_Bottle : MonoBehaviour
 	[SerializeField]
 	public float forceArchimed;
 
-	private GameObject Water;
+	private Transform Water;
 	public float PartUnderWater;
 	private float objectScaleY;
 
@@ -33,7 +33,7 @@ public class AF_Bottle : MonoBehaviour
 
 	private void OnTriggerStay(Collider col)
 	{
-		PartUnderWater = 1 - (transform.position.y + objectScaleY / 2 - Water.transform.position.y) / objectScaleY;
+		PartUnderWater = 1 - (transform.position.y + objectScaleY / 2 - Water.position.y) / objectScaleY;
 		if (PartUnderWater < 0f)
 			PartUnderWater = 0f;
 		else if (PartUnderWater > 1f)
@@ -55,7 +55,7 @@ public class AF_Bottle : MonoBehaviour
 
 	private void Start()
 	{
-		Water = GameObject.Find("Water");
+		Water = GameObject.Find("Water").transform;
 		_rigidbody = GetComponent<Rigidbody>();
 
 		objectDensity = 1270f;

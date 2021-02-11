@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveTo : MonoBehaviour
 {
 	private GameObject[] Objects = new GameObject[5];
+	private Transform Water;
 	public static char whichObj;
 
 	private void Update()
@@ -34,6 +35,13 @@ public class MoveTo : MonoBehaviour
 			Objects[2].GetComponent<AF_Bottle>().dampingForce = 0;
 			Objects[3].GetComponent<AF_Gold>().dampingForce = 0;
 			Objects[4].GetComponent<AF_Glass>().dampingForce = 0;
+
+			Objects[0].GetComponent<AF_Ice>().h = 0;
+			Objects[1].GetComponent<AF_Log>().h = 0;
+			Objects[3].GetComponent<AF_Gold>().h = 0;
+			Objects[4].GetComponent<AF_Glass>().h = 0;
+
+			Water.position = new Vector3(500, 3, 500);
 
 			Objects[0].transform.position = new Vector3(500, 6, 500);
 			Objects[0].GetComponent<Rigidbody>().isKinematic = false;
@@ -67,6 +75,13 @@ public class MoveTo : MonoBehaviour
 			Objects[3].GetComponent<AF_Gold>().dampingForce = 0;
 			Objects[4].GetComponent<AF_Glass>().dampingForce = 0;
 
+			Objects[0].GetComponent<AF_Ice>().h = 0;
+			Objects[1].GetComponent<AF_Log>().h = 0;
+			Objects[3].GetComponent<AF_Gold>().h = 0;
+			Objects[4].GetComponent<AF_Glass>().h = 0;
+
+			Water.position = new Vector3(500, 3, 500);
+
 			Objects[1].transform.position = new Vector3(500, 6, 500);
 			Objects[1].GetComponent<Rigidbody>().isKinematic = false;
 
@@ -98,6 +113,13 @@ public class MoveTo : MonoBehaviour
 			Objects[2].GetComponent<AF_Bottle>().dampingForce = 0;
 			Objects[3].GetComponent<AF_Gold>().dampingForce = 0;
 			Objects[4].GetComponent<AF_Glass>().dampingForce = 0;
+
+			Objects[0].GetComponent<AF_Ice>().h = 0;
+			Objects[1].GetComponent<AF_Log>().h = 0;
+			Objects[3].GetComponent<AF_Gold>().h = 0;
+			Objects[4].GetComponent<AF_Glass>().h = 0;
+
+			Water.position = new Vector3(500, 3, 500);
 
 			Objects[2].transform.position = new Vector3(500, 6, 499.3f);
 			Objects[2].GetComponent<Rigidbody>().isKinematic = false;
@@ -131,6 +153,13 @@ public class MoveTo : MonoBehaviour
 			Objects[3].GetComponent<AF_Gold>().dampingForce = 0;
 			Objects[4].GetComponent<AF_Glass>().dampingForce = 0;
 
+			Objects[0].GetComponent<AF_Ice>().h = 0;
+			Objects[1].GetComponent<AF_Log>().h = 0;
+			Objects[3].GetComponent<AF_Gold>().h = 0;
+			Objects[4].GetComponent<AF_Glass>().h = 0;
+
+			Water.position = new Vector3(500, 3, 500);
+
 			Objects[3].transform.position = new Vector3(500, 6, 500);
 			Objects[3].GetComponent<Rigidbody>().isKinematic = false;
 
@@ -163,6 +192,13 @@ public class MoveTo : MonoBehaviour
 			Objects[3].GetComponent<AF_Gold>().dampingForce = 0;
 			Objects[4].GetComponent<AF_Glass>().dampingForce = 0;
 
+			Objects[0].GetComponent<AF_Ice>().h = 0;
+			Objects[1].GetComponent<AF_Log>().h = 0;
+			Objects[3].GetComponent<AF_Gold>().h = 0;
+			Objects[4].GetComponent<AF_Glass>().h = 0;
+
+			Water.position = new Vector3(500, 3, 500);
+
 			Objects[4].transform.position = new Vector3(500, 6, 500);
 			Objects[4].GetComponent<Rigidbody>().isKinematic = false;
 
@@ -177,6 +213,8 @@ public class MoveTo : MonoBehaviour
 		Objects[2] = GameObject.Find("Bottle");
 		Objects[3] = GameObject.Find("Gold");
 		Objects[4] = GameObject.Find("Glass");
+
+		Water = GameObject.Find("Water").transform;
 
 		foreach (GameObject obj in Objects)
 		{

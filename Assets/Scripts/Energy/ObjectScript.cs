@@ -9,7 +9,8 @@ public class ObjectScript : MonoBehaviour
 	private BoxCollider Ground_Box_Collider;
 	private GameObject Object_For_Distance;
 	private Rigidbody _rigidbody;
-	private Transform Arrow;
+	private GameObject[] arrows = new GameObject[3];
+	private GameObject[] signs = new GameObject[3];
 	private bool paused = true;
 
 	public float h; // Высота;								Не изменяется человеком
@@ -33,8 +34,8 @@ public class ObjectScript : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.S))
-			if (!paused)
+		if (Input.GetMouseButtonDown(1))
+			if (!paused)						
 			{
 				Time.timeScale = 0;
 				paused = true;
@@ -48,8 +49,12 @@ public class ObjectScript : MonoBehaviour
 		h = transform.position.y - 0.15f;
 		if (h < 0.5f)
 		{
-			Arrow.gameObject.SetActive(false);
-			UI_4.V1.gameObject.SetActive(false);
+			arrows[0].SetActive(false);
+			arrows[1].SetActive(false);
+			arrows[2].SetActive(false);
+			signs[0].SetActive(false);
+			signs[1].SetActive(false);
+			signs[2].SetActive(false);
 		}
 
 		if (_rigidbody.velocity.x > 0)
@@ -79,7 +84,12 @@ public class ObjectScript : MonoBehaviour
 		v = 0;
 		Ftr = 0;
 
-		Arrow = GameObject.Find("Arrow").transform;
+		arrows[0] = GameObject.Find("Ftr_Arrow");
+		arrows[1] = GameObject.Find("mg_Arrow");
+		arrows[2] = GameObject.Find("N_Arrow");
+		signs[0] = GameObject.Find("Ftr_Sign");
+		signs[1] = GameObject.Find("mg_Sign");
+		signs[2] = GameObject.Find("N_Sign");
 
 		Ground = GameObject.Find("Ground");
 		Object_For_Distance = GameObject.Find("Object_For_Distance");

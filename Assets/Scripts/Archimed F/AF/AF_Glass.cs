@@ -10,7 +10,8 @@ public class AF_Glass : MonoBehaviour
 	[SerializeField]
 	public float forceArchimed;
 
-	private GameObject Water;
+	private Transform Water;
+	public float h;
 	public float PartUnderWater;
 	private float objectScaleY;
 
@@ -26,7 +27,7 @@ public class AF_Glass : MonoBehaviour
 
 	private void OnTriggerStay(Collider col)
 	{
-		PartUnderWater = 1 - (transform.position.y + objectScaleY / 2 - Water.transform.position.y) / objectScaleY;
+		PartUnderWater = 1 - (transform.position.y + objectScaleY / 2 - Water.position.y) / objectScaleY;
 		if (PartUnderWater < 0f)
 			PartUnderWater = 0f;
 		else if (PartUnderWater > 1f)
@@ -35,6 +36,8 @@ public class AF_Glass : MonoBehaviour
 			PartUnderWater = (float)Math.Round(PartUnderWater, 2);
 
 		submergedVolume = PartUnderWater * objectVolume;
+		h = submergedVolume / 12.5f;
+		Water.position = new Vector3(500, 3 + h, 500);
 
 		forceArchimed = waterDensity * g * submergedVolume;
 
@@ -48,7 +51,7 @@ public class AF_Glass : MonoBehaviour
 
 	private void Start()
 	{
-		Water = GameObject.Find("Water");
+		Water = GameObject.Find("Water").transform;
 		_rigidbody = GetComponent<Rigidbody>();
 
 		objectDensity = 2500f;

@@ -19,31 +19,18 @@ public class UI_3 : MonoBehaviour
 
 	public void Instruction()
 	{
-		if (isHidden == true)
-			isHidden = false;
-		else
-			isHidden = true;
+		isHidden = !isHidden;
 	}
 
 	public void Instruction1()
 	{
-		if (isHidden1 == true)
-			isHidden1 = false;
-		else
-			isHidden1 = true;
+		isHidden1 = !isHidden1;
 	}
 
 	private void Update()
 	{
-		if (isHidden == true)
-			Manual.SetActive(false);
-		else
-			Manual.SetActive(true);
-
-		if (isHidden1 == true)
-			k.SetActive(false);
-		else
-			k.SetActive(true);
+		Manual.SetActive(!isHidden);
+		k.SetActive(!isHidden1);
 
 		try
 		{

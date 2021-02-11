@@ -12,6 +12,8 @@ public class CamMove : MonoBehaviour
 
 	private Transform ForRuler;
 
+	private bool is_init;
+
 	private IEnumerator Springing()
 	{
 		upCube1Transform.position = new Vector3(500, 5.7f, 500);
@@ -25,18 +27,22 @@ public class CamMove : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.A))
+		if (Input.GetMouseButtonDown(1) && is_init == false)
 		{
 			transform.position = new Vector3(507, 4, 500);
 			ForRuler.position = new Vector3(500.5f, 2.17f, 497.01f);
+
+			is_init = true;
 		}
-		if (Input.GetKeyDown(KeyCode.D))
+		else if (Input.GetMouseButtonDown(1) && is_init == true)
 		{
 			transform.position = new Vector3(507, 4, 526);
 			ForRuler.position = new Vector3(500.5f, 2.17f, 525.01f);
+
+			is_init = false;
 		}
 
-		if (Input.GetKeyDown(KeyCode.R))
+		if (Input.GetMouseButtonDown(2))
 			StartCoroutine(Springing());
 	}
 
@@ -49,5 +55,7 @@ public class CamMove : MonoBehaviour
 		upCube2PosInit = upCube2Transform.position;
 
 		ForRuler = GameObject.Find("ForRuler").transform;
+
+		is_init = true;
 	}
 }

@@ -42,13 +42,13 @@ public class PhotonAngles : MonoBehaviour
 		if (other.gameObject.name == "Box01")
 		{
 			transform.eulerAngles = new Vector3(180 - angle_x, 0, 0);
-			angleSqrt.text = "Угол преломления: 0°";
+			angleSqrt.text = "От зеркала фотоны отражаются под тем же углом, под которым вылетели из лампочки";
 			Kef.text = "Коэф. преломления: 0";
 		}
 		else if (other.gameObject.name == "Plane")
 		{
 			transform.eulerAngles = new Vector3(180 - rnd.Next(-90, 90), 0, 180 - rnd.Next(-90, 90));
-			angleSqrt.text = "Угол преломления: 0°";
+			angleSqrt.text = "Так как поверхность бумаги шершавая, фотоны отражаются под хаотичным углом";
 			Kef.text = "Коэф. преломления: 0";
 		}
 		else if (other.gameObject.name == "Glass")
@@ -68,7 +68,8 @@ public class PhotonAngles : MonoBehaviour
 			otherPhoton.AddComponent<TrailRenderer>();
 			otherPhoton.GetComponent<TrailRenderer>().startWidth = 0.04f;
 			otherPhoton.GetComponent<TrailRenderer>().time = 0.35f;
-			otherPhoton.GetComponent<TrailRenderer>().material = (Material)Resources.Load("TrailMat");
+			otherPhoton.GetComponent<TrailRenderer>().material = (Material)Resources.Load("ReflectedMat");
+			otherPhoton.AddComponent<Color_Phot>();
 		}
 		else if (other.gameObject.name == "WaterBox")
 		{
@@ -87,7 +88,7 @@ public class PhotonAngles : MonoBehaviour
 			otherPhoton.AddComponent<TrailRenderer>();
 			otherPhoton.GetComponent<TrailRenderer>().startWidth = 0.04f;
 			otherPhoton.GetComponent<TrailRenderer>().time = 0.35f;
-			otherPhoton.GetComponent<TrailRenderer>().material = (Material)Resources.Load("TrailMat");
+			otherPhoton.GetComponent<TrailRenderer>().material = (Material)Resources.Load("ReflectedMat");
 		}
 	}
 

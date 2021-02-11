@@ -5,28 +5,135 @@ using UnityEngine;
 
 public class Stages : MonoBehaviour
 {
-	private GameObject[] turbines = new GameObject[4];
-	private Rigidbody[] rbTurbines = new Rigidbody[4];
+	// GameObject, FixedJoint and parent = null
+	private GameObject[] Stage1_gameObjects = new GameObject[4]; // Отделение - 120 сек
+	private GameObject Stage2_gameObj; // Отделение - 160 сек
+	private GameObject Stage3_gameObj; // 200 сек >> 600 сек всего
+	private FixedJoint[] Stage2toX_1 = new FixedJoint[4];
+	private FixedJoint Stage3to2_fixedJoint;
+	// Rigidbody (for AddForce)
+	private Rigidbody[] Stage1_rbs = new Rigidbody[4];
+	private Rigidbody Stage2_rb;
+	private Rigidbody Stage3_rb;
+	// Dry mass (const)
+	private const float Stage1_dry_mass = 3750f; // (4) 15 тонн
+	private const float Stage2_dry_mass = 6000f; // 6 тонн
+	private const float Stage3_dry_mass = 10000f; // 10 тонн
+	// Fuel mass
+	private float Stage1_fuel_mass;
+	private float Stage2_fuel_mass;
+	// Скорость истечения газов
+	private const float ū = 2500f;
+	// Расход массы топлива в секунду
+	private const float Stage1_Δf = 40000f / 120f; // (4) all_fuel_mass / time
+	private const float Stage2_Δf = 90000f / 160f;
+	// Сила, прикладываемая к каждой ступени каждом этапе
+	private const float F1 = ū * Stage1_Δf; // (4)
+	private const float F2 = ū * Stage2_Δf;
+	// Определяет в зависимости от пройденного времени какая сейчас ступень; isFly для задержки перед стартом; UI_Δf для UI-скрипта
+	private byte whichStage;
+	private byte isFly;
+	public static int UI_Δf;
+	// Масса всей ракеты
+	public static float Mass;
 
-	public IEnumerator Jetting ()
+	// Just calculate all Mass
+	private void Update()
 	{
-		yield return new WaitForSeconds(36);
+		foreach (Rigidbody rb in Stage1_rbs)
+			rb.mass = Stage1_dry_mass + Stage1_fuel_mass;
+		Stage2_rb.mass = Stage2_dry_mass + Stage2_fuel_mass;
+		Stage3_rb.mass = Stage3_dry_mass;
 
-		foreach (Rigidbody rbTurbine in rbTurbines)
-			rbTurbine.isKinematic = false;
-
-		foreach (GameObject turbine in turbines)
-			turbine.transform.parent = null;
+		Mass = Stage1_rbs[0].mass * 4 + Stage2_rb.mass + Stage3_rb.mass;
 	}
 
-	void Start()
-    {
+	// (Stages timing; Start delay) and (parent = null; fixedJoint = null) (автоматизировано полностью)
+	private IEnumerator Which_Stage_Now()
+	{
+		yield return new WaitForSeconds(1);
+
+		isFly = 1;
+		whichStage = 1;
+		UI_Δf = 330 * 4;
+
+		yield return new WaitForSeconds(120);
+
+		UI_Δf = (int)Stage2_Δf;
+		whichStage = 2;
+		foreach (GameObject stage in Stage1_gameObjects)
+			stage.transform.parent = null;
+		foreach (FixedJoint fj in Stage2toX_1)
+			Destroy(fj);	
+
+		yield return new WaitForSeconds(160);
+
+		whichStage = 3;
+		Stage2_gameObj.transform.parent = null;
+		Stage3to2_fixedJoint.connectedBody = null;
+		UI_Δf = 0;
+	}
+
+	// Трата топлива (автоматизировано полностью)
+	private IEnumerator Fuel_Spending()
+	{
+		yield return new WaitForSeconds(1);
+
+		while (whichStage != 0)
+		{
+			if (whichStage == 1)
+			{
+				Stage1_fuel_mass -= Stage1_Δf / 10f;
+				yield return new WaitForSeconds(0.1f);
+			}
+			else if (whichStage == 2)
+			{
+				Stage1_fuel_mass = 0;
+				Stage2_fuel_mass -= Stage2_Δf / 10f;
+				yield return new WaitForSeconds(0.1f);
+			}
+		}
+	}
+
+	// Actually rb.AddFoce
+	private void FixedUpdate()
+	{
+		if (whichStage == 1)
+		{
+			foreach (Rigidbody stage in Stage1_rbs)
+				stage.AddForce(0, F1 * isFly, 0);
+		}
+		else if (whichStage == 2)
+			Stage2_rb.AddForce(0, F2, 0);
+	}
+
+	private void Start()
+	{
+		// Initial fuel mass
+		Stage1_fuel_mass = 40000f; // (4) 160 тонн
+		Stage2_fuel_mass = 90000f; // 90 тонн
+
+		// GameObject, FixedJoint and Rigidbody initialization
 		for (int i = 0; i < 4; ++i)
 		{
-			turbines[i] = GameObject.Find($"Turbine{i + 1}");
-			rbTurbines[i] = turbines[i].GetComponent<Rigidbody>();
+			Stage1_gameObjects[i] = GameObject.Find($"Stage1_{i + 1}");
+			Stage1_rbs[i] = Stage1_gameObjects[i].GetComponent<Rigidbody>();
+			Stage1_rbs[i].mass = Stage1_dry_mass + Stage1_fuel_mass;
 		}
+		Stage2_gameObj = GameObject.Find("Stage2");
+		Stage3_gameObj = GameObject.Find("Stage3");
+		Stage2toX_1 = Stage2_gameObj.GetComponents<FixedJoint>();
+		Stage3to2_fixedJoint = Stage3_gameObj.GetComponent<FixedJoint>();
+		Stage2_rb = Stage2_gameObj.GetComponent<Rigidbody>();
+		Stage3_rb = Stage3_gameObj.GetComponent<Rigidbody>();
+		Stage2_rb.mass = Stage2_dry_mass + Stage2_fuel_mass;
+		Stage3_rb.mass = Stage3_dry_mass;
 
-		StartCoroutine(Jetting());
+		isFly = 0;
+
+		StartCoroutine(Which_Stage_Now());
+		StartCoroutine(Fuel_Spending());
+
+		Time.timeScale = 5;
 	}
 }

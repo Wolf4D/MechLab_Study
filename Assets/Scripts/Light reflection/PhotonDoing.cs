@@ -22,6 +22,7 @@ public class PhotonDoing : MonoBehaviour
 			photonArray[i].gameObject.name = $"Photon_Clone {i + 1}";
 			photonArray[i].layer = 8;
 			photonArray[i].AddComponent<PhotonAngles>();
+			photonArray[i].AddComponent<Color_Phot>();
 			photonArray[i].GetComponent<SphereCollider>().isTrigger = true;
 			photonArray[i].AddComponent<Rigidbody>();
 			photonArray[i].GetComponent<Rigidbody>().isKinematic = true;
@@ -48,6 +49,8 @@ public class PhotonDoing : MonoBehaviour
 				photonArray[i].GetComponent<TrailRenderer>().startWidth = 0.04f;
 				photonArray[i].GetComponent<TrailRenderer>().time = 0.35f;
 				photonArray[i].GetComponent<TrailRenderer>().material = (Material)Resources.Load("TrailMat");
+
+				photonArray[i].GetComponent<MeshRenderer>().material = (Material)Resources.Load("Photon");
 
 				yield return new WaitForSeconds(0.3f);
 			}
