@@ -6,9 +6,9 @@ using UnityEngine;
 public class Stages : MonoBehaviour
 {
 	// GameObject, FixedJoint and parent = null
-	private GameObject[] Stage1_gameObjects = new GameObject[4]; // Отделение - 120 сек
-	private GameObject Stage2_gameObj; // Отделение - 160 сек
-	private GameObject Stage3_gameObj; // 200 сек >> 600 сек всего
+	private GameObject[] Stage1_gameObjects = new GameObject[4]; // Отделение - 60 сек
+	private GameObject Stage2_gameObj; // Отделение - 60 сек
+	private GameObject Stage3_gameObj;
 	private FixedJoint[] Stage2toX_1 = new FixedJoint[4];
 	private FixedJoint Stage3to2_fixedJoint;
 	// Rigidbody (for AddForce)
@@ -25,8 +25,8 @@ public class Stages : MonoBehaviour
 	// Скорость истечения газов
 	private const float ū = 2500f;
 	// Расход массы топлива в секунду
-	private const float Stage1_Δf = 40000f / 120f; // (4) all_fuel_mass / time
-	private const float Stage2_Δf = 90000f / 160f;
+	private const float Stage1_Δf = 10000f / 60f; // (4) all_fuel_mass / time
+	private const float Stage2_Δf = 30000f / 60f;
 	// Сила, прикладываемая к каждой ступени каждом этапе
 	private const float F1 = ū * Stage1_Δf; // (4)
 	private const float F2 = ū * Stage2_Δf;
@@ -43,38 +43,41 @@ public class Stages : MonoBehaviour
 		foreach (Rigidbody rb in Stage1_rbs)
 			rb.mass = Stage1_dry_mass + Stage1_fuel_mass;
 		Stage2_rb.mass = Stage2_dry_mass + Stage2_fuel_mass;
-		Stage3_rb.mass = Stage3_dry_mass;
 
 		Mass = Stage1_rbs[0].mass * 4 + Stage2_rb.mass + Stage3_rb.mass;
 	}
 
-	// (Stages timing; Start delay) and (parent = null; fixedJoint = null) (автоматизировано полностью)
+	// (Stages timing; Start delay) and (parent = null; fixedJoint = null)
 	private IEnumerator Which_Stage_Now()
 	{
+		{
 		yield return new WaitForSeconds(1);
 
 		isFly = 1;
 		whichStage = 1;
 		UI_Δf = 330 * 4;
+		}
+	
+		yield return new WaitForSeconds(60);
 
-		yield return new WaitForSeconds(120);
-
-		UI_Δf = (int)Stage2_Δf;
 		whichStage = 2;
 		foreach (GameObject stage in Stage1_gameObjects)
 			stage.transform.parent = null;
+		foreach (Rigidbody rb in Stage1_rbs)
+			rb.mass = Stage1_dry_mass;
 		foreach (FixedJoint fj in Stage2toX_1)
-			Destroy(fj);	
+			Destroy(fj);
+		UI_Δf = (int)Stage2_Δf;
 
-		yield return new WaitForSeconds(160);
+		yield return new WaitForSeconds(60);
 
-		whichStage = 3;
+		whichStage = 0;
 		Stage2_gameObj.transform.parent = null;
-		Stage3to2_fixedJoint.connectedBody = null;
+		Destroy(Stage3to2_fixedJoint);
 		UI_Δf = 0;
 	}
 
-	// Трата топлива (автоматизировано полностью)
+	// Трата топлива
 	private IEnumerator Fuel_Spending()
 	{
 		yield return new WaitForSeconds(1);
@@ -83,19 +86,21 @@ public class Stages : MonoBehaviour
 		{
 			if (whichStage == 1)
 			{
-				Stage1_fuel_mass -= Stage1_Δf / 10f;
-				yield return new WaitForSeconds(0.1f);
+				Stage1_fuel_mass -= Stage1_Δf;
+				yield return new WaitForSeconds(1f);
 			}
 			else if (whichStage == 2)
 			{
 				Stage1_fuel_mass = 0;
-				Stage2_fuel_mass -= Stage2_Δf / 10f;
-				yield return new WaitForSeconds(0.1f);
+				Stage2_fuel_mass -= Stage2_Δf;
+				yield return new WaitForSeconds(1f);
 			}
 		}
+		Stage2_fuel_mass = 0;
+		Stage2_rb.isKinematic = true;
 	}
 
-	// Actually rb.AddFoce
+	// Actually rb.AddFoce (автоматизировано полностью)
 	private void FixedUpdate()
 	{
 		if (whichStage == 1)
@@ -110,8 +115,8 @@ public class Stages : MonoBehaviour
 	private void Start()
 	{
 		// Initial fuel mass
-		Stage1_fuel_mass = 40000f; // (4) 160 тонн
-		Stage2_fuel_mass = 90000f; // 90 тонн
+		Stage1_fuel_mass = 10000f; // (4) 120 тонн
+		Stage2_fuel_mass = 30000f; // 60 тонн
 
 		// GameObject, FixedJoint and Rigidbody initialization
 		for (int i = 0; i < 4; ++i)

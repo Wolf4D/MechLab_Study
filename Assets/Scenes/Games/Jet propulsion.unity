@@ -3020,7 +3020,7 @@ PrefabInstance:
     - target: {fileID: 5349420754555348784, guid: 7cc1e2d6ed876fe469e23e37bd3fb861,
         type: 3}
       propertyPath: m_Text
-      value: "h = 300 \u043A\u043C\n"
+      value: "h = 470 \u043A\u043C\n"
       objectReference: {fileID: 0}
     - target: {fileID: 5349420754555348785, guid: 7cc1e2d6ed876fe469e23e37bd3fb861,
         type: 3}

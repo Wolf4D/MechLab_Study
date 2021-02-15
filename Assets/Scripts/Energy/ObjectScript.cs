@@ -21,7 +21,7 @@ public class ObjectScript : MonoBehaviour
 	private float S; // Пройденное расстояние				Не изменяется человеком
 	private float A; // Работа силы трения					Не изменяется человеком
 
-	public float mass; // Масса;							Может изменяться человеком
+	public float mass; // Масса;						Может изменяться человеком
 	public float M; // Коэффициент трения;					Может изменяться человеком
 	public float t0; // Начальная температура;				Может изменяться человеком
 
@@ -70,7 +70,10 @@ public class ObjectScript : MonoBehaviour
 		S = Vector3.Distance(Object_For_Distance.transform.position, transform.position);
 		N = mass * g * (float)Math.Cos(90 - Ground.transform.eulerAngles.z);
 
-		Ftr = M * N;
+		if (M * N > mass * g * (float)Math.Sin(Ground.transform.eulerAngles.z))
+			Ftr = mass * g * (float)Math.Sin(Ground.transform.eulerAngles.z);
+		else
+			Ftr = M * N;
 		A = Ftr * S;
 		Q = A;
 		t = Q / c / mass + t0;
