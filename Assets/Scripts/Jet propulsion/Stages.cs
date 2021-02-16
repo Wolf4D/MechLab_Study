@@ -138,7 +138,5 @@ public class Stages : MonoBehaviour
 
 		StartCoroutine(Which_Stage_Now());
 		StartCoroutine(Fuel_Spending());
-
-		Time.timeScale = 5;
 	}
 }

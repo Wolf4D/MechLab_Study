@@ -83,7 +83,6 @@ public class ObjectScript : MonoBehaviour
 
 	private void Start()
 	{
-		Time.timeScale = 0;
 		v = 0;
 		Ftr = 0;
 

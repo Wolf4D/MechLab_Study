@@ -97,5 +97,7 @@ public class UI_5 : MonoBehaviour
 		V = GameObject.Find("V").GetComponent<Text>();
 		PUW_Text = GameObject.Find("PUW").GetComponent<Text>();
 		FA = GameObject.Find("FA").GetComponent<Text>();
+
+		Time.timeScale = 1;
 	}
 }

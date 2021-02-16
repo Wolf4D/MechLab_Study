@@ -57,5 +57,7 @@ public class UI_3 : MonoBehaviour
 
 		Input_m_parallel = GameObject.Find("Input_m_parallel").GetComponent<Text>();
 		Input_m_posl = GameObject.Find("Input_m_posl").GetComponent<Text>();
+
+		Time.timeScale = 1;
 	}
 }

@@ -96,5 +96,7 @@ public class UI_4 : MonoBehaviour
 		Ftr = GameObject.Find("Ftr").GetComponent<Text>();
 		T = GameObject.Find("T").GetComponent<Text>();
 		Q = GameObject.Find("Q").GetComponent<Text>();
+
+		Time.timeScale = 0;
 	}
 }

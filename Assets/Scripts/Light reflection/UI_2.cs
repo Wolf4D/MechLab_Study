@@ -53,5 +53,7 @@ public class UI_2 : MonoBehaviour
 		AngleText = GameObject.Find("AngleText").GetComponent<Text>();
 
 		PhotonDoing_Script = GameObject.Find("Lightbulb").GetComponent<PhotonDoing>();
+
+		Time.timeScale = 1;
 	}
 }
